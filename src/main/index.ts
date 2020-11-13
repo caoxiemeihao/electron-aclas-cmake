@@ -14,6 +14,10 @@ function bootstrap() {
   ipcHandle()
 
   win.loadURL(`http://127.0.0.1:${port}`)
+
+  if (!app.isPackaged) { // 开发模式下自动打开开发者工具
+    win.webContents.openDevTools()
+  }
 }
 
 function ipcHandle() {

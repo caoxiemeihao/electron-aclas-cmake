@@ -6,8 +6,8 @@ module.exports = {
   mode: argv.env === 'development' ? 'development' : 'production',
   entry: path.join(__dirname, '../src/main/index.ts'),
   output: {
-    path: path.join(__dirname, '../dist'),
-    filename: 'main/index.js',
+    path: path.join(__dirname, '../src/main'),
+    filename: 'index.js',
   },
   target: 'electron-main',
   node: {

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,12 +8,18 @@
   <link rel="stylesheet" href="./css/bootstrap.4.5.3.css">
   <link rel="stylesheet" href="./css/main.css">
 </head>
+
 <body>
   <div id="root">
-    <button @click="dispatchDZC">下发电子称</button>
+    <div class="p-3">
+      <button @click="dispatchDZC">下发电子称</button>
+      <hr>
+      <code v-if="dispatchResult.length">{{ dispatchResult | stringify }}</code>
+    </div>
   </div>
 
   <script src="./js/vue.js"></script>
   <script src="./js/main.js"></script>
 </body>
+
 </html>
