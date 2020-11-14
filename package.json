@@ -9,8 +9,13 @@
     "dev:render": "node script/build.render --watch",
     "dev:main": "node script/build.main --watch",
     "test": "node src/main/aclas/test/run",
-    "preinstall": "npm config set cmake_js_arch x64",    
+    "--preinstall": "npm config set cmake_js_arch x64",    
     "install": "cmake-js compile"
+  },
+  "cmake-js": {
+    "runtime": "electron",
+    "runtimeVersion": "9.1.0",
+    "arch": "x64"
   },
   "dependencies": {
     "vue": "^2.6.12"

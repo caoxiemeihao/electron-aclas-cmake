@@ -83,3 +83,4 @@ typings/
 **/debug
 build
 dist
+src/main/index.js

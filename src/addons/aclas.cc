@@ -3,6 +3,21 @@
 #include <napi.h>
 using namespace std;
 
+BOOL is_ran = false; // 判断是否有给调用处反馈
+
+// 通过 stdout 的方式将数据推给 node.js
+void Stdout2Nodejs(INT32 code, INT32 index, INT32 total)
+{
+	std::cout << "##dispatch={"
+		<< "\"code\":" << code
+		<< ","
+		<< "\"index\":" << index
+		<< ","
+		<< "\"total\":" << total
+		<< "}##" << std::endl;
+	is_ran = true;
+}
+
 // ================================================================================
 struct DviIn
 {
@@ -45,6 +60,8 @@ extern "C"
 
 void WINAPI ongress(UINT32 Eorrorcode, UINT32 index, UINT32 Total, char *userdata)
 {
+
+	Stdout2Nodejs(Eorrorcode, index, Total);
 
 	switch (Eorrorcode)
 	{
@@ -89,6 +106,7 @@ void Start(char* host, UINT32 proceType, char* filename, char* dll = "AclasSDK.d
 	HMODULE hModule = LoadLibrary(TEXT(dll));
 
 	if (!hModule) {
+		Stdout2Nodejs(404, 0, 0);
 		cout << "LoadLibrary failed." << endl;
 		cout << hModule << endl;
 		return;
@@ -121,6 +139,9 @@ void Start(char* host, UINT32 proceType, char* filename, char* dll = "AclasSDK.d
 	pAclasSDKExecTask exectask = (pAclasSDKExecTask)GetProcAddress(hModule, "AclasSDK_ExecTaskA");
 	pAclasSDKWaitForTask waitfortask = (pAclasSDKWaitForTask)GetProcAddress(hModule, "AclasSDK_WaitForTask");
 	HANDLE handle = waitfortask(exectask(addr, 5002, info->ProtocolType, 0, 0x0000, filename, fp, userdata));
+
+	if (!is_ran) { Stdout2Nodejs(403, 0, 0); } // 链接超时.
+	is_ran = false;
 
 	// 释放资源
 	GetProcAddress(hModule, "AclasSDK_Finalize");
