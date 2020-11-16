@@ -12,6 +12,7 @@ new Vue({
   }),
   methods: {
     dispatchDZC() { // 下发电子称
+      this.dispatchResult = [];
       ipcRenderer.invoke('dispatch-DZC');
     },
   },

@@ -38,7 +38,7 @@ const config = {
   filename: path.join(__dirname, 'test/plu.txt'),
   dll_path: path.join(__dirname, 'Win64/AclasSDK.dll'), // md5: 35b248a0c1c35c39e90d2f17408b6ea4
   extra: 'C++ | stdout',
-  debug: false,
+  debug: true,
 };
 
 aclas(config, () => {});
