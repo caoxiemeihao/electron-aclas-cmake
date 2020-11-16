@@ -10,3 +10,7 @@
 ## 命令
 - 启动 electron `npm run dev` or `yarn dev`
 - 插件在 node 环境下测试 `npm run test` or `yarn test`
+
+---
+
+![](https://raw.githubusercontent.com/caoxiemeihao/electron-aclas-cmake/master/screenshot/dispatch-info.png)
