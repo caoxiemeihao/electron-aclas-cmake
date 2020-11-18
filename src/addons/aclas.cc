@@ -114,7 +114,7 @@ void Start(char* host, UINT32 proceType, char* filename, char* dll = "AclasSDK.d
 	DebugLog(host);
 	DebugLog(itoa(proceType, type, 10));
 	DebugLog(filename);
-	DebugLog(filename);
+	DebugLog(dll);
 
 	HMODULE hModule = LoadLibrary(TEXT(dll));
 
