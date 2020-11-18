@@ -2,15 +2,8 @@ import { join } from 'path'
 import { fork } from 'child_process'
 const { log, parse_str2arr } = require('./utils');
 
-// const _config = {
-//   host: '192.168.1.2',
-//   filename: join(__dirname, './test/plu.txt'),
-//   dll: join(__dirname, './Win64/AclasSDK.dll'),
-//   type: 0x0000,
-// }
-
-function runAclas(config, callback) {
-  // const conf = Object.assign(_config, config)
+/** 子进程运行 */
+function runChild(config, callback) {
 
   const forked = fork(join(__dirname, 'aclas/run-child.js'), { stdio: 'pipe', })
   forked.stdout.on('data', chunk => {
@@ -49,4 +42,13 @@ function runAclas(config, callback) {
   })
 }
 
-export default runAclas
+/** 直接运行: 阻塞线程方式 */
+function run() {
+  try {
+    require('./run')()
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export default runChild
